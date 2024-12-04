@@ -185,5 +185,8 @@ const tic_tac_toe_game = (function(win, doc) {
     function printBoard() {
 	gameboard.printToLog();
     }
+
+    return {
+	fillSpace, printBoard
     }
 })(window, document);
