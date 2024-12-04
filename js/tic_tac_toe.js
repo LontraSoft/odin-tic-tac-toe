@@ -158,5 +158,8 @@ const tic_tac_toe_game = (function(win, doc) {
 
     // Initializations
     gameScoreboard = Scoreboard(PLAYER_COUNT);
+    function printBoard() {
+	gameboard.printToLog();
+    }
     }
 })(window, document);
