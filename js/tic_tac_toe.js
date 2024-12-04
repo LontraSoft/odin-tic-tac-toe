@@ -110,7 +110,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	    return null;
 	}
 
-	function isWinner() {
+	function getWinner() {
 	    let horizontalWinner = getHorizontalWinner();
 	    let verticalWinner = getVerticalWinner();
 	    let diagonalWinner = getDiagonalWinner();
@@ -155,6 +155,7 @@ const tic_tac_toe_game = (function(win, doc) {
 
     // Tic-tac-toe variables
     let playerTurn = PLAYERS.X;
+    let winner = null;
 
     // Initializations
     gameScoreboard = Scoreboard(PLAYER_COUNT);
@@ -172,6 +173,13 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
 	else {
 	    gameboard.setSpaceState(x, y, gameboard.SPACE_STATES.O);
+	}
+
+	winner = gameboard.getWinner();
+
+	if (winner !== null) {
+	    gameScoreboard.addScore(winner);
+	    win.console.log("Winner is " + winner + "!");
 	}
 	
 	if (playerTurn === PLAYERS.X) {
