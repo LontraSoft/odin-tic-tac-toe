@@ -158,6 +158,30 @@ const tic_tac_toe_game = (function(win, doc) {
 
     // Initializations
     gameScoreboard = Scoreboard(PLAYER_COUNT);
+
+    // Game functions
+    function fillSpace(x, y) {
+	if (gameboard.getSpaceState(x, y) !== gameboard.SPACE_STATES.UNUSED)
+	{
+	    win.console.log("Space already filled!");
+	    return;
+	}
+
+	if (playerTurn === PLAYERS.X) {
+	    gameboard.setSpaceState(x, y, gameboard.SPACE_STATES.X);
+	}
+	else {
+	    gameboard.setSpaceState(x, y, gameboard.SPACE_STATES.O);
+	}
+	
+	if (playerTurn === PLAYERS.X) {
+	    playerTurn = PLAYERS.O;
+	}
+	else {
+	    playerTurn = PLAYERS.X;
+	}
+    }
+    
     function printBoard() {
 	gameboard.printToLog();
     }
