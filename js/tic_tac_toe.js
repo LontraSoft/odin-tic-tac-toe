@@ -212,6 +212,6 @@ const tic_tac_toe_game = (function(win, doc) {
     }
 
     return {
-	PLAYERS, fillSpace, printBoard, resetBoard, isWinner, getwinner
+	PLAYERS, fillSpace, printBoard, resetBoard, isWinner, getWinner
     }
 })(window, document);
