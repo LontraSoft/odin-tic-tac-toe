@@ -27,5 +27,13 @@ const tic_tac_toe_game = (function(win, doc) {
 	const INITIAL_BOARD =
 	    Array.from({length: BOARD_SIDE_LENGTH},
 		() => Array(BOARD_SIDE_LENGTH).fill(SPACE_STATES.UNUSED));
+
+	// A deep copy is needed to prevent the board from reusing the
+	// old board state
+	function deepCopyArray(array) {
+	    return JSON.parse(JSON.stringify(array));
+	}
+
+	let board = deepCopyArray(INITIAL_BOARD);
     }
 })(window, document);
