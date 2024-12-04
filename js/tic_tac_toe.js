@@ -35,5 +35,21 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
 
 	let board = deepCopyArray(INITIAL_BOARD);
+	
+	function getSpaceState(x, y) {
+	    return board[y][x];
+	}
+
+	function setSpaceState(x, y, state) {
+	    board[y][x] = state;
+	}
+
+	function isSpaceEmpty(x, y) {
+	    return board[y][x] === SPACE_STATES.UNUSED;
+	}
+
+	function resetBoard() {
+	    board = deepCopyArray(INITIAL_BOARD);
+	}
     }
 })(window, document);
