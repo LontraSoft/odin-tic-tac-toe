@@ -194,12 +194,16 @@ const tic_tac_toe_game = (function(win, doc) {
 	    playerTurn = PLAYERS.X;
 	}
     }
+
+    function resetBoard() {
+	gameboard.resetBoard();
+    }
     
     function printBoard() {
 	gameboard.printToLog();
     }
 
     return {
-	fillSpace, printBoard
+	fillSpace, printBoard, resetBoard
     }
 })(window, document);
