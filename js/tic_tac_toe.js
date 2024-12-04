@@ -145,5 +145,18 @@ const tic_tac_toe_game = (function(win, doc) {
 	    SPACE_STATES, getSpaceState, setSpaceState, resetBoard, isWinner, isSpaceEmpty, printToLog
 	}
     })();
+
+    // Tic-tac-toe constants
+    const PLAYER_COUNT = 2;
+    const PLAYERS = {
+	X : 0,
+	O : 1
+    }
+
+    // Tic-tac-toe variables
+    let playerTurn = PLAYERS.X;
+
+    // Initializations
+    gameScoreboard = Scoreboard(PLAYER_COUNT);
     }
 })(window, document);
