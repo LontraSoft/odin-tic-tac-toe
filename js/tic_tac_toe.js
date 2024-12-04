@@ -167,6 +167,9 @@ const tic_tac_toe_game = (function(win, doc) {
 	    win.console.log("That space already filled!");
 	    return;
 	}
+
+	if (winner !== null) {
+	    win.console.log("The game is already over!");
 	    return;
 	}
 
