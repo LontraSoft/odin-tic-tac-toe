@@ -140,5 +140,10 @@ const tic_tac_toe_game = (function(win, doc) {
 	    boardString += "-------------";
 	    win.console.log(boardString);
 	}
+
+	return {
+	    SPACE_STATES, getSpaceState, setSpaceState, resetBoard, isWinner, isSpaceEmpty, printToLog
+	}
+    })();
     }
 })(window, document);
