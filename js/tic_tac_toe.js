@@ -51,6 +51,82 @@ const tic_tac_toe_game = (function(win, doc) {
 	function resetBoard() {
 	    board = deepCopyArray(INITIAL_BOARD);
 	}
+
+	// Returns the game state of the winning player or null if no player
+	// has won on the horizontals
+	function getHorizontalWinner() {
+	    let winner = null;
+	    for (y = 0; y < BOARD_SIDE_LENGTH; y++) {
+		let previous_board_state = board[y][0];
+		
+		if (lastSpaceState === SPACE_STATES.UNUSED) {
+		    continue;
+		}
+
+		winner = previous_board_state;
+		for (x = 0; x < BOARD_SIDE_LENGTH; x++) {
+		    if (board[y][x] !== lastSpaceState) {
+			winner = null;
+		    }
+		}
+	    }
+	    return winner;
+	}
+
+	// Returns the game state of the winning player or null if no player
+	// has won on the verticals
+	function getVerticalWinner() {
+	    let winner = null;
+	    for (x = 0; x < BOARD_SIDE_LENGTH; x++) {
+		let previous_board_state = board[0][x];
+		
+		if (lastSpaceState === SPACE_STATES.UNUSED) {
+		    continue;
+		}
+		
+		winner = previous_board_state;
+		for (y = 0; y < BOARD_SIDE_LENGTH; y++) {
+		    if (board[y][x] !== lastSpaceState) {
+			winner = null;
+		    }
+		}
+	    }
+	    return winner;
+	}
+
+	// Returns the game state of the winning player or null if no player
+	// has won on the diagonals
+	function getDiagonalWinner() {
+	    isMiddleFilled = board[1][1] !== SPACE_STATES.UNUSED;
+	    if (!isMiddleFilled) {
+		return null;
+	    }
+	    if (board[0][0] === board[1][1] && board[1][1] === board[2][2] && board[0][0]) {
+		return board[0][0];
+	    }
+	    if (board[0][2] === board[1][1] && board[1][1] === board[2][0] && board[0][2]) {
+		return board[0][2];
+	    }
+	    return null;
+	}
+
+	function isWinner() {
+	    let horizontalWinner = getHorizontalWinner();
+	    let verticalWinner = getVerticalWinner();
+	    let diagonalWinner = getDiagonalWinner();
+
+	    if (horizontalWinner !== null) {
+		return horizontalWinner;
+	    }
+	    if (verticalWinner !== null) {
+		return verticalWinner;
+	    }
+	    if (diagonalWinner !== null) {
+		return diagonalWinner;
+	    }
+	    return null;
+	}
+
 	function printToLog()
 	{
 	    let boardString = "------------- \n";
