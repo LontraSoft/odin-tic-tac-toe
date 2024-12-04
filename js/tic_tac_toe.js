@@ -164,7 +164,9 @@ const tic_tac_toe_game = (function(win, doc) {
     function fillSpace(x, y) {
 	if (gameboard.getSpaceState(x, y) !== gameboard.SPACE_STATES.UNUSED)
 	{
-	    win.console.log("Space already filled!");
+	    win.console.log("That space already filled!");
+	    return;
+	}
 	    return;
 	}
 
