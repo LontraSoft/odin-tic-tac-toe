@@ -51,5 +51,18 @@ const tic_tac_toe_game = (function(win, doc) {
 	function resetBoard() {
 	    board = deepCopyArray(INITIAL_BOARD);
 	}
+	function printToLog()
+	{
+	    let boardString = "------------- \n";
+	    for (y = BOARD_SIDE_LENGTH - 1; y >= 0; y--) {
+		boardString += "| ";
+		for (x = 0; x < BOARD_SIDE_LENGTH; x++) {
+		    boardString += getSpaceState(x, y) + " | ";
+		}
+		boardString += "\n";
+	    }
+	    boardString += "-------------";
+	    win.console.log(boardString);
+	}
     }
 })(window, document);
