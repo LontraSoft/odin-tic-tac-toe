@@ -59,13 +59,13 @@ const tic_tac_toe_game = (function(win, doc) {
 	    for (y = 0; y < BOARD_SIDE_LENGTH; y++) {
 		let previous_board_state = board[y][0];
 		
-		if (lastSpaceState === SPACE_STATES.UNUSED) {
+		if (previous_board_state === SPACE_STATES.UNUSED) {
 		    continue;
 		}
 
 		winner = previous_board_state;
-		for (x = 0; x < BOARD_SIDE_LENGTH; x++) {
-		    if (board[y][x] !== lastSpaceState) {
+		for (x = 1; x < BOARD_SIDE_LENGTH; x++) {
+		    if (board[y][x] !== previous_board_state) {
 			winner = null;
 		    }
 		}
@@ -80,13 +80,13 @@ const tic_tac_toe_game = (function(win, doc) {
 	    for (x = 0; x < BOARD_SIDE_LENGTH; x++) {
 		let previous_board_state = board[0][x];
 		
-		if (lastSpaceState === SPACE_STATES.UNUSED) {
+		if (previous_board_state === SPACE_STATES.UNUSED) {
 		    continue;
 		}
 		
 		winner = previous_board_state;
 		for (y = 0; y < BOARD_SIDE_LENGTH; y++) {
-		    if (board[y][x] !== lastSpaceState) {
+		    if (board[y][x] !== previous_board_state) {
 			winner = null;
 		    }
 		}
