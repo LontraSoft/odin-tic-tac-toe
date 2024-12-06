@@ -184,7 +184,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	winner = gameboard.getWinner();
 
 	if (winner !== null) {
-	    gameScoreboard.addScore(winner);
+	    gameScoreboard.incrementScore(winner);
 	    win.console.log("Winner is " + winner + "!");
 	}
 	
