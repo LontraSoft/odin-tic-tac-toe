@@ -159,7 +159,7 @@ const tic_tac_toe_game = (function(win, doc) {
     let winner = null;
 
     // Initializations
-    gameScoreboard = Scoreboard(PLAYER_COUNT);
+    let gameScoreboard = Scoreboard(PLAYER_COUNT);
 
     // Game functions
     function fillSpace(x, y) {
