@@ -204,7 +204,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	return gameboard.getWinner();
     }
 
-    function resetBoard() {
+    function prepareNextRound() {
 	gameboard.resetBoard();
     }
     
@@ -213,6 +213,6 @@ const tic_tac_toe_game = (function(win, doc) {
     }
 
     return {
-	PLAYERS, fillSpace, printBoard, resetBoard, isWinner, getWinner
+	PLAYERS, fillSpace, printBoard, prepareNextRound, isWinner, getWinner
     }
 })(window, document);
