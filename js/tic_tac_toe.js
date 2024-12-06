@@ -197,11 +197,11 @@ const tic_tac_toe_game = (function(win, doc) {
     }
 
     function isWinner() {
-	return winner !== null;
+	return gameboard.isWinner();
     }
 
     function getWinner() {
-	return winner;
+	return gameboard.getWinner();
     }
 
     function resetBoard() {
