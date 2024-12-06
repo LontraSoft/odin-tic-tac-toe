@@ -49,6 +49,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
 
 	function resetBoard() {
+	    winner = null;
 	    board = deepCopyArray(INITIAL_BOARD);
 	}
 
