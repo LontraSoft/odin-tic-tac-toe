@@ -143,7 +143,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
 
 	return {
-	    SPACE_STATES, getSpaceState, setSpaceState, resetBoard, isWinner, isSpaceEmpty, printToLog
+	    SPACE_STATES, getSpaceState, setSpaceState, resetBoard, isWinner, getWinner, isSpaceEmpty, printToLog
 	}
     })();
 
