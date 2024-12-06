@@ -156,7 +156,6 @@ const tic_tac_toe_game = (function(win, doc) {
 
     // Tic-tac-toe variables
     let playerTurn = PLAYERS.X;
-    let winner = null;
 
     // Initializations
     let gameScoreboard = Scoreboard(PLAYER_COUNT);
