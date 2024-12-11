@@ -36,12 +36,26 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
 
 	let board = deepCopyArray(INITIAL_BOARD);
+
+	function isCoordinatesInBoard(x, y) {
+	    let isXInBoard = x >= 0 || x < boardSideLength;
+	    let isYInBoard = y >= 0 || y < boardSideLength;
+	    return isXInBoard && isYInBoard;
+	}
 	
 	function getSpaceState(x, y) {
+	    if (!isCoordinatesInBoard(x, y)) {
+		win.console.error(`Invalid parameters for board size ${boardSideLength}\nX:${x} Y:{y}`); 
+		return;
+	    }
 	    return board[y][x];
 	}
 
 	function setSpaceState(x, y, state) {
+	    if (!isCoordinatesInBoard(x, y)) {
+		win.console.error(`Invalid parameters for board size ${boardSideLength}\nX:${x} Y:{y}`); 
+		return;
+	    }
 	    board[y][x] = state;
 	}
 
