@@ -338,8 +338,8 @@ cell_2_2.dataset.x = 2;
 cell_2_2.dataset.y = 2;
 
 function updateCell(cell) {
-    cellX = cell.dataset.x;
-    cellY = cell.dataset.y;
+    let cellX = cell.dataset.x;
+    let cellY = cell.dataset.y;
     switch (tic_tac_toe_game.getBoardState(cellX, cellY)) {
     case "X":
 	cell.style.backgroundImage = X_URL;
