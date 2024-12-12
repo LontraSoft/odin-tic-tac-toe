@@ -274,6 +274,18 @@ const tic_tac_toe_game = (function(win, doc) {
 	return roundWinner;
     }
 
+    function isGameWinner() {
+	return gameWinner !== NO_WINNER;
+    }
+
+    function getGameWinner() {
+	return gameWinner;
+    }
+
+    function getPlayerTurn() {
+	return playerTurn;
+    }
+
     function prepareNextRound() {
 	gameboard.resetBoard();
 	roundWinner = NO_WINNER;
@@ -285,7 +297,7 @@ const tic_tac_toe_game = (function(win, doc) {
     }
 
     return {
-	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner, getBoardState
+	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner, getBoardState, isGameWinner, getGameWinner, getPlayerTurn, getScore
     }
 })(window, document);
 
@@ -304,6 +316,9 @@ const cell_2_1 = document.querySelector("#cell-2-1");
 const cell_0_2 = document.querySelector("#cell-0-2");
 const cell_1_2 = document.querySelector("#cell-1-2");
 const cell_2_2 = document.querySelector("#cell-2-2");
+const display = document.querySelector(".display");
+const xScoreContainer = document.querySelector(".x-score");
+const oScoreContainer = document.querySelector(".o-score");
 
 // Image constants
 const X_URL = "url('./images/x.svg')";
@@ -360,6 +375,38 @@ function updateGrid() {
     }
 }
 
+function displayRoundWinner() {
+    let roundWinner = tic_tac_toe_game.getRoundWinner();
+    display.textContent = `${roundWinner} has won the round!`;
+}
+
+function displayGameWinner() {
+    let gameWinner = tic_tac_toe_game.getGameWinner();
+    display.textContent = `${gameWinner} has won the game!`;
+}
+
+function updateDisplay() {
+    if (tic_tac_toe_game.isGameWinner()) {
+	displayGameWinner();
+	return;
+    }
+    if (tic_tac_toe_game.isRoundWinner()) {
+	displayRoundWinner();
+	return;
+    }
+    
+    let playerTurn = tic_tac_toe_game.getPlayerTurn();
+    display.textContent = `${playerTurn}'s turn`;
+}
+
+function updateScoreboard() {
+    let xScore = tic_tac_toe_game.getScore(tic_tac_toe_game.PLAYERS.X);
+    let oScore = tic_tac_toe_game.getScore(tic_tac_toe_game.PLAYERS.O);
+
+    xScoreContainer.textContent = `X: ${xScore}`;
+    oScoreContainer.textContent = `Y: ${oScore}`;
+}
+
 function clickCell(event) {
     // Figure out which cell was clicked
     targetX = event.target.dataset.x;
@@ -370,6 +417,8 @@ function clickCell(event) {
     
     // Update the view of the gameboard
     updateGrid();
+    updateDisplay();
+    updateScoreboard();
 }
 
 gameGrid.addEventListener("click", clickCell);
