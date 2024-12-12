@@ -1,9 +1,26 @@
+:root {
+    --grid-side-length: 100px;
+}
+
+body {
+    display: flex;
+}
+
+.game-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .game-board {
     display: grid;
     grid-template:
-	"cell-0-2 cell-1-2 cell-2-2" 100px
-	"cell-0-1 cell-1-1 cell-2-1" 100px
-	"cell-0-0 cell-1-0 cell-2-0" 100px / 100px 100px 100px;
+	"cell-0-2 cell-1-2 cell-2-2" var(--grid-side-length)
+	"cell-0-1 cell-1-1 cell-2-1" var(--grid-side-length)
+	"cell-0-0 cell-1-0 cell-2-0" var(--grid-side-length)
+	/ var(--grid-side-length) var(--grid-side-length) var(--grid-side-length);
+    flex: 0 0 auto;
 }
 
 .game-cell {
@@ -15,3 +32,18 @@
     width: auto;
     height: 100%;
 }
+
+.name-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-container img {
+    display: block;
+    width: var(--grid-side-length);
+    height: var(--grid-side-length);
+    object-fit: contain;
+}
+    

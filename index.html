@@ -7,22 +7,32 @@
     <script src="./js/tic_tac_toe.js" defer></script>
   </head>
   <body>
-    <div class="game-board">
-      <div class="game-cell" id="cell-0-2"></div>
-      <div class="game-cell" id="cell-1-2"></div>
-      <div class="game-cell" id="cell-2-2"></div>
-      <div class="game-cell" id="cell-0-1"></div>
-      <div class="game-cell" id="cell-1-1"></div>
-      <div class="game-cell" id="cell-2-1"></div>
-      <div class="game-cell" id="cell-0-0"></div>
-      <div class="game-cell" id="cell-1-0"></div>
-      <div class="game-cell" id="cell-2-0"></div>
+    <div class="name-container">
+      <h2 class="player-x-name"></h2>
+      <img src="./images/x.svg" alt="X" class="player-x-icon"/>
     </div>
-    <div class="controls">
-      <button type="button" id="next-round-btn">Next Round</button>
-      <button type="button" id="reset-btn">Reset</button>
+    <div class="game-area">
+      <h1>Tic-Tac-Toe</h1>
+      <div class="game-board">
+	<div class="game-cell" id="cell-0-2"></div>
+	<div class="game-cell" id="cell-1-2"></div>
+	<div class="game-cell" id="cell-2-2"></div>
+	<div class="game-cell" id="cell-0-1"></div>
+	<div class="game-cell" id="cell-1-1"></div>
+	<div class="game-cell" id="cell-2-1"></div>
+	<div class="game-cell" id="cell-0-0"></div>
+	<div class="game-cell" id="cell-1-0"></div>
+	<div class="game-cell" id="cell-2-0"></div>
+      </div>
+      <div class="controls">
+	<button type="button" id="reset-button">Reset</button>
+      </div>
+      <div class="display"></div>
     </div>
-    <div class="display"></div>
+    <div class="name-container">
+      <h2 class="player-o-name"></h2>
+      <img src="./images/o.svg" alt="X" class="player-o-icon"/>
+    </div>
       
   </body>
 </html>
