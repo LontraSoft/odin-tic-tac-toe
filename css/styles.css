@@ -1,0 +1,17 @@
+.game-board {
+    display: grid;
+    grid-template:
+	"cell-0-2 cell-1-2 cell-2-2" 100px
+	"cell-0-1 cell-1-1 cell-2-1" 100px
+	"cell-0-0 cell-1-0 cell-2-0" 100px / 100px 100px 100px;
+}
+
+.game-cell {
+    border: 2px solid black;
+    background-size: contain;
+}
+
+.game-cell img {
+    width: auto;
+    height: 100%;
+}
