@@ -230,7 +230,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	return playerTurn;
     }
 
-    function prepareNextRound() {
+    function reset() {
 	gameboard.resetBoard();
 	roundWinner = NO_WINNER;
 	playerTurn = PLAYERS.X;
@@ -253,6 +253,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	const cell_1_2 = document.querySelector("#cell-1-2");
 	const cell_2_2 = document.querySelector("#cell-2-2");
 	const display = document.querySelector(".display");
+	const resetButton = document.querySelector("#reset-button");
 	
 	// Image constants
 	const X_URL = "url('./images/x.svg')";
@@ -318,6 +319,12 @@ const tic_tac_toe_game = (function(win, doc) {
 	    
 	    display.textContent = `${playerTurn}'s turn`;
 	}
+
+	function resetBoard() {
+	    reset();
+	    updateDisplay();
+	    updateGrid();
+	}
 	
 	function clickCell(event) {
 	    // Figure out which cell was clicked
@@ -331,9 +338,9 @@ const tic_tac_toe_game = (function(win, doc) {
 	    updateGrid();
 	    updateDisplay();
 	}
-	
+
+	resetButton.addEventListener("click", resetBoard); 
 	gameGrid.addEventListener("click", clickCell);
-	
     })();
     
     return {
