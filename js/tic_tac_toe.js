@@ -1,23 +1,6 @@
 const tic_tac_toe_game = (function(win, doc) {
     const BOARD_SIDE_LENGTH = 3;
     
-    function Scoreboard (playerCount) {
-	let scores = new Array(playerCount).fill(0);
-	
-	const incrementScore = (playerNumber) => {
-	    scores[playerNumber] += 1;
-	}
-	
-	const getScore = (playerNumber) => {
-	    return scores[playerNumber];
-	}
-	
-	return {
-	    incrementScore,
-	    getScore
-	}
-    }
-
     // gameboard coordinates are layed out as a 3x3 grid with y=0 being the
     // bottom and x=0 being the left
     let gameboard = (function (boardSideLength) {
@@ -88,17 +71,11 @@ const tic_tac_toe_game = (function(win, doc) {
     })(BOARD_SIDE_LENGTH);
 
     // Tic-tac-toe constants
-    const PLAYER_COUNT = 2;
-    const ROUNDS_TO_WIN_GAME = 5;
     const PLAYERS = {
 	X : "X",
 	O : "O"
     }
     const NO_WINNER = null;
-    const PLAYER_TO_SCORE_ID = Object.freeze({
-	[PLAYERS.X] : 0,
-	[PLAYERS.O] : 1
-    });
     const BOARD_STATE_TO_WINNER = Object.freeze({
 	[gameboard.SPACE_STATES.X] : PLAYERS.X,
 	[gameboard.SPACE_STATES.O] : PLAYERS.O,
@@ -109,9 +86,6 @@ const tic_tac_toe_game = (function(win, doc) {
     let playerTurn = PLAYERS.X;
     let roundWinner = NO_WINNER;
     let gameWinner = NO_WINNER;
-
-    // Initializations
-    let gameScoreboard = Scoreboard(PLAYER_COUNT);
 
     // Returns the game state of the winning player or null if no player
     // has won on the horizontals
@@ -209,14 +183,6 @@ const tic_tac_toe_game = (function(win, doc) {
 	roundWinner = getDiagonalWinner();
     }
 
-    function getScore(player) {
-	return gameScoreboard.getScore(PLAYER_TO_SCORE_ID[player]);
-    }
-
-    function incrementScore(player) {
-	gameScoreboard.incrementScore(PLAYER_TO_SCORE_ID[player]);
-    }
-
     // Game functions
     function fillSpace(x, y) {
 	if (gameboard.getSpaceState(x, y) !== gameboard.SPACE_STATES.UNUSED)
@@ -244,20 +210,6 @@ const tic_tac_toe_game = (function(win, doc) {
 
 	updateWinner();
 	win.console.log(`Debug: Winner state: ${roundWinner}`);
-
-	if (roundWinner !== NO_WINNER) {
-	    incrementScore(roundWinner);
-	    win.console.log("Winner is " + roundWinner + "!");
-
-	    
-	    let xScore = getScore(PLAYERS.X);
-	    let yScore = getScore(PLAYERS.O);
-	    win.console.log(`X Score: ${xScore}\nY Score: ${yScore}`);
-	    if (xScore === ROUNDS_TO_WIN_GAME || yScore === ROUNDS_TO_WIN_GAME) {
-		gameWinner = (xScore === 5) ? PLAYERS.X : PLAYERS.Y;
-		win.console.log(`Game winner determined: ${gameWinner}`);
-	    }
-	}
 	
 	playerTurn = (playerTurn === PLAYERS.X) ? PLAYERS.O : PLAYERS.X;
     }
@@ -272,14 +224,6 @@ const tic_tac_toe_game = (function(win, doc) {
 
     function getRoundWinner() {
 	return roundWinner;
-    }
-
-    function isGameWinner() {
-	return gameWinner !== NO_WINNER;
-    }
-
-    function getGameWinner() {
-	return gameWinner;
     }
 
     function getPlayerTurn() {
@@ -297,7 +241,7 @@ const tic_tac_toe_game = (function(win, doc) {
     }
 
     return {
-	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner, getBoardState, isGameWinner, getGameWinner, getPlayerTurn, getScore
+	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner, getBoardState, getPlayerTurn
     }
 })(window, document);
 
@@ -380,16 +324,8 @@ function displayRoundWinner() {
     display.textContent = `${roundWinner} has won the round!`;
 }
 
-function displayGameWinner() {
-    let gameWinner = tic_tac_toe_game.getGameWinner();
-    display.textContent = `${gameWinner} has won the game!`;
-}
 
 function updateDisplay() {
-    if (tic_tac_toe_game.isGameWinner()) {
-	displayGameWinner();
-	return;
-    }
     if (tic_tac_toe_game.isRoundWinner()) {
 	displayRoundWinner();
 	return;
@@ -397,14 +333,6 @@ function updateDisplay() {
     
     let playerTurn = tic_tac_toe_game.getPlayerTurn();
     display.textContent = `${playerTurn}'s turn`;
-}
-
-function updateScoreboard() {
-    let xScore = tic_tac_toe_game.getScore(tic_tac_toe_game.PLAYERS.X);
-    let oScore = tic_tac_toe_game.getScore(tic_tac_toe_game.PLAYERS.O);
-
-    xScoreContainer.textContent = `X: ${xScore}`;
-    oScoreContainer.textContent = `Y: ${oScore}`;
 }
 
 function clickCell(event) {
@@ -418,7 +346,6 @@ function clickCell(event) {
     // Update the view of the gameboard
     updateGrid();
     updateDisplay();
-    updateScoreboard();
 }
 
 gameGrid.addEventListener("click", clickCell);
