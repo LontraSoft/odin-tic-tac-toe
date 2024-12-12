@@ -253,8 +253,6 @@ const tic_tac_toe_game = (function(win, doc) {
 	const cell_1_2 = document.querySelector("#cell-1-2");
 	const cell_2_2 = document.querySelector("#cell-2-2");
 	const display = document.querySelector(".display");
-	const xScoreContainer = document.querySelector(".x-score");
-	const oScoreContainer = document.querySelector(".o-score");
 	
 	// Image constants
 	const X_URL = "url('./images/x.svg')";
