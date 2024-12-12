@@ -258,20 +258,20 @@ const tic_tac_toe_game = (function(win, doc) {
 
     let displayController = (function (win, doc) {
 	// DOM constants
-	const xNameDisplay = document.querySelector(".player-x-name");
-	const oNameDisplay = document.querySelector(".player-o-name");
-	const gameGrid = document.querySelector(".game-board");
-	const cell_0_0 = document.querySelector("#cell-0-0");
-	const cell_1_0 = document.querySelector("#cell-1-0");
-	const cell_2_0 = document.querySelector("#cell-2-0");
-	const cell_0_1 = document.querySelector("#cell-0-1");
-	const cell_1_1 = document.querySelector("#cell-1-1");
-	const cell_2_1 = document.querySelector("#cell-2-1");
-	const cell_0_2 = document.querySelector("#cell-0-2");
-	const cell_1_2 = document.querySelector("#cell-1-2");
-	const cell_2_2 = document.querySelector("#cell-2-2");
-	const display = document.querySelector(".display");
-	const resetButton = document.querySelector("#reset-button");
+	const xNameDisplay = doc.querySelector(".player-x-name");
+	const oNameDisplay = doc.querySelector(".player-o-name");
+	const gameGrid = doc.querySelector(".game-board");
+	const cell_0_0 = doc.querySelector("#cell-0-0");
+	const cell_1_0 = doc.querySelector("#cell-1-0");
+	const cell_2_0 = doc.querySelector("#cell-2-0");
+	const cell_0_1 = doc.querySelector("#cell-0-1");
+	const cell_1_1 = doc.querySelector("#cell-1-1");
+	const cell_2_1 = doc.querySelector("#cell-2-1");
+	const cell_0_2 = doc.querySelector("#cell-0-2");
+	const cell_1_2 = doc.querySelector("#cell-1-2");
+	const cell_2_2 = doc.querySelector("#cell-2-2");
+	const display = doc.querySelector(".display");
+	const resetButton = doc.querySelector("#reset-button");
 	
 	// Image constants
 	const X_URL = "url('./images/x.svg')";
@@ -360,7 +360,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	oNameDisplay.textContent = PlayerData.getPlayerO().name;
 	resetButton.addEventListener("click", resetBoard); 
 	gameGrid.addEventListener("click", clickCell);
-    })();
+    })(win, doc);
     
     return {
 	TURNS, fillSpace, printBoard, reset, isRoundWinner, getRoundWinner, getBoardState, getTurn
