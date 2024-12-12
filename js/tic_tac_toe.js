@@ -70,22 +70,40 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
     })(BOARD_SIDE_LENGTH);
 
+    function createPlayer(name) {
+	return {name};
     }
-    const NO_WINNER = null;
-    const BOARD_STATE_TO_WINNER = Object.freeze({
-	[gameboard.SPACE_STATES.X] : PLAYERS.X,
-	[gameboard.SPACE_STATES.O] : PLAYERS.O,
-	[gameboard.SPACE_STATES.UNUSED] : NO_WINNER
+
+    // Tic-tac-toe constants
+    const DEFAULT_PLAYER_X = Object.freeze(createPlayer("Xavier"));
+    const DEFAULT_PLAYER_O = Object.freeze(createPlayer("Octavia"));
+    const PlayerData = (function(playerX = DEFAULT_PLAYER_X, playerO = DEFAULT_PLAYER_O) {
+	function getPlayerX() {return playerX}
+	function getPlayerO() {return playerO}
+	function setPlayerX(player) {playerX = player}
+	function setPlayerO(player) {playerO = player}
+
+	return {getPlayerX, getPlayerO, setPlayerX, setPlayerO};
+    })();
     const TURNS = Object.freeze({
 	X: "X",
 	O: "O"
     });
+    const NO_WINNER = null;
 
     // Tic-tac-toe variables
     let turn = TURNS.X;
     let roundWinner = NO_WINNER;
     let gameWinner = NO_WINNER;
 
+    function getTurnPlayer() {
+	return playerTurn === TURNS.X ? PlayerData.X : PlayerData.O;
+    }
+
+    function spaceStateToPlayer(spaceState) {
+	return spaceState === gameboard.SPACE_STATES.X ? PlayerData.getPlayerX() : PlayerData.getPlayerO();
+    }
+    
     // Returns the game state of the winning player or null if no player
     // has won on the horizontals
     function getHorizontalWinner() {
@@ -104,8 +122,7 @@ const tic_tac_toe_game = (function(win, doc) {
 		}
 	    }
 	    if (possibleWinnerState !== gameboard.SPACE_STATES.UNUSED) {
-		win.console.log(`DEBUG: horizontal winner detected ${possibleWinnerState}`);		
-		return BOARD_STATE_TO_WINNER[possibleWinnerState];
+		return spaceStateToPlayer(possibleWinnerState);
 	    }
 	}
 
@@ -131,7 +148,7 @@ const tic_tac_toe_game = (function(win, doc) {
 		}
 	    }
 	    if (possibleWinnerState !== gameboard.SPACE_STATES.UNUSED) {
-		return BOARD_STATE_TO_WINNER[possibleWinnerState];
+		return spaceStateToPlayer(possibleWinnerState);
 	    }
 	}
 
@@ -160,7 +177,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	    gameboard.getSpaceState(1, 1) === gameboard.getSpaceState(2, 0);
 	
 	if (isForwardDiagonalMatching || isBackwardDiagonalMatching) {
-	    return BOARD_STATE_TO_WINNER[gameboard.getSpaceState(1, 1)];
+	    return spaceStateToPlayer(gameboard.getSpaceState(1, 1));
 	}
 	
 	return NO_WINNER;
@@ -312,7 +329,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	
 	function updateDisplay() {
 	    if (isRoundWinner()) {
-		display.textContent = `${roundWinner} has won the round!`;
+		display.textContent = `${roundWinner.name} has won the round!`;
 		return;
 	    }
 	    
