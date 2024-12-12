@@ -261,6 +261,10 @@ const tic_tac_toe_game = (function(win, doc) {
 	
 	playerTurn = (playerTurn === PLAYERS.X) ? PLAYERS.O : PLAYERS.X;
     }
+
+    function getBoardState(x, y) {
+	return gameboard.getSpaceState(x, y);
+    }
     
     function isRoundWinner() {
 	return roundWinner !== null;
@@ -281,6 +285,91 @@ const tic_tac_toe_game = (function(win, doc) {
     }
 
     return {
-	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner
+	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner, getBoardState
     }
 })(window, document);
+
+// Grid constants
+const GRID_ROWS = 3;
+const GRID_COLLUMNS = 3;
+
+// DOM constants
+const gameGrid = document.querySelector(".game-board");
+const cell_0_0 = document.querySelector("#cell-0-0");
+const cell_1_0 = document.querySelector("#cell-1-0");
+const cell_2_0 = document.querySelector("#cell-2-0");
+const cell_0_1 = document.querySelector("#cell-0-1");
+const cell_1_1 = document.querySelector("#cell-1-1");
+const cell_2_1 = document.querySelector("#cell-2-1");
+const cell_0_2 = document.querySelector("#cell-0-2");
+const cell_1_2 = document.querySelector("#cell-1-2");
+const cell_2_2 = document.querySelector("#cell-2-2");
+
+// Image constants
+const X_URL = "url('./images/x.svg')";
+const O_URL = "url('./images/o.svg')";
+
+// Attach metadata to cells
+cell_0_0.dataset.x = 0;
+cell_0_0.dataset.y = 0;
+
+cell_1_0.dataset.x = 1;
+cell_1_0.dataset.y = 0;
+
+cell_2_0.dataset.x = 2;
+cell_2_0.dataset.y = 0;
+
+cell_0_1.dataset.x = 0;
+cell_0_1.dataset.y = 1;
+
+cell_1_1.dataset.x = 1;
+cell_1_1.dataset.y = 1;
+
+cell_2_1.dataset.x = 2;
+cell_2_1.dataset.y = 1;
+
+cell_0_2.dataset.x = 0;
+cell_0_2.dataset.y = 2;
+
+cell_1_2.dataset.x = 1;
+cell_1_2.dataset.y = 2;
+
+cell_2_2.dataset.x = 2;
+cell_2_2.dataset.y = 2;
+
+function updateCell(cell) {
+    cellX = cell.dataset.x;
+    cellY = cell.dataset.y;
+    switch (tic_tac_toe_game.getBoardState(cellX, cellY)) {
+    case "X":
+	cell.style.backgroundImage = X_URL;
+	break;
+    case "O":
+	cell.style.backgroundImage = O_URL;
+	break;
+    default:
+	cell.style.backgroundImage = "none";
+    }
+}
+
+function updateGrid() {
+    let cellList = gameGrid.querySelectorAll(".game-cell");
+    console.table(cellList);
+    for (cell of cellList) {
+	updateCell(cell);
+    }
+}
+
+function clickCell(event) {
+    // Figure out which cell was clicked
+    targetX = event.target.dataset.x;
+    targetY = event.target.dataset.y;
+
+    // Fill the correct grid area in the game if possible
+    tic_tac_toe_game.fillSpace(targetX, targetY);
+    
+    // Update the view of the gameboard
+    updateGrid();
+}
+
+gameGrid.addEventListener("click", clickCell);
