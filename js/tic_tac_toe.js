@@ -1,13 +1,14 @@
 const tic_tac_toe_game = (function(win, doc) {
     const BOARD_SIDE_LENGTH = 3;
     
-    function Scoreboard(playerCount) {
-	scores = new Array(playerCount).fill(0);
+    function Scoreboard (playerCount) {
+	let scores = new Array(playerCount).fill(0);
 	
-	function incrementScore(playerNumber) {
+	const incrementScore = (playerNumber) => {
 	    scores[playerNumber] += 1;
 	}
-	function getScore(playerNumber) {
+	
+	const getScore = (playerNumber) => {
 	    return scores[playerNumber];
 	}
 	
