@@ -89,11 +89,16 @@ const tic_tac_toe_game = (function(win, doc) {
 
     // Tic-tac-toe constants
     const PLAYER_COUNT = 2;
+    const ROUNDS_TO_WIN_GAME = 5;
     const PLAYERS = {
 	X : "X",
 	O : "O"
     }
     const NO_WINNER = null;
+    const PLAYER_TO_SCORE_ID = Object.freeze({
+	[PLAYERS.X] : 0,
+	[PLAYERS.O] : 1
+    });
     const BOARD_STATE_TO_WINNER = Object.freeze({
 	[gameboard.SPACE_STATES.X] : PLAYERS.X,
 	[gameboard.SPACE_STATES.O] : PLAYERS.O,
@@ -131,7 +136,6 @@ const tic_tac_toe_game = (function(win, doc) {
 	    }
 	}
 
-	
 	return NO_WINNER;
     }
     
@@ -205,6 +209,14 @@ const tic_tac_toe_game = (function(win, doc) {
 	roundWinner = getDiagonalWinner();
     }
 
+    function getScore(player) {
+	return gameScoreboard.getScore(PLAYER_TO_SCORE_ID[player]);
+    }
+
+    function incrementScore(player) {
+	gameScoreboard.incrementScore(PLAYER_TO_SCORE_ID[player]);
+    }
+
     // Game functions
     function fillSpace(x, y) {
 	if (gameboard.getSpaceState(x, y) !== gameboard.SPACE_STATES.UNUSED)
@@ -215,6 +227,11 @@ const tic_tac_toe_game = (function(win, doc) {
 
 	if (roundWinner !== NO_WINNER) {
 	    win.console.log("The round is already over!");
+	    return;
+	}
+
+	if (gameWinner !== NO_WINNER) {
+	    win.console.log(`The game has already been won by ${gameWinner}`);
 	    return;
 	}
 
@@ -229,8 +246,17 @@ const tic_tac_toe_game = (function(win, doc) {
 	win.console.log(`Debug: Winner state: ${roundWinner}`);
 
 	if (roundWinner !== NO_WINNER) {
-	    gameScoreboard.incrementScore(roundWinner);
+	    incrementScore(roundWinner);
 	    win.console.log("Winner is " + roundWinner + "!");
+
+	    
+	    let xScore = getScore(PLAYERS.X);
+	    let yScore = getScore(PLAYERS.O);
+	    win.console.log(`X Score: ${xScore}\nY Score: ${yScore}`);
+	    if (xScore === ROUNDS_TO_WIN_GAME || yScore === ROUNDS_TO_WIN_GAME) {
+		gameWinner = (xScore === 5) ? PLAYERS.X : PLAYERS.Y;
+		win.console.log(`Game winner determined: ${gameWinner}`);
+	    }
 	}
 	
 	playerTurn = (playerTurn === PLAYERS.X) ? PLAYERS.O : PLAYERS.X;
