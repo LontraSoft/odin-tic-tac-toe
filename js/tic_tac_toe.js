@@ -70,20 +70,19 @@ const tic_tac_toe_game = (function(win, doc) {
 	}
     })(BOARD_SIDE_LENGTH);
 
-    // Tic-tac-toe constants
-    const PLAYERS = {
-	X : "X",
-	O : "O"
     }
     const NO_WINNER = null;
     const BOARD_STATE_TO_WINNER = Object.freeze({
 	[gameboard.SPACE_STATES.X] : PLAYERS.X,
 	[gameboard.SPACE_STATES.O] : PLAYERS.O,
 	[gameboard.SPACE_STATES.UNUSED] : NO_WINNER
+    const TURNS = Object.freeze({
+	X: "X",
+	O: "O"
     });
 
     // Tic-tac-toe variables
-    let playerTurn = PLAYERS.X;
+    let turn = TURNS.X;
     let roundWinner = NO_WINNER;
     let gameWinner = NO_WINNER;
 
@@ -201,7 +200,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	    return;
 	}
 
-	if (playerTurn === PLAYERS.X) {
+	if (turn === TURNS.X) {
 	    gameboard.setSpaceState(x, y, gameboard.SPACE_STATES.X);
 	}
 	else {
@@ -211,7 +210,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	updateWinner();
 	win.console.log(`Debug: Winner state: ${roundWinner}`);
 	
-	playerTurn = (playerTurn === PLAYERS.X) ? PLAYERS.O : PLAYERS.X;
+	turn = (turn === TURNS.X) ? TURNS.O : TURNS.X;
     }
 
     function getBoardState(x, y) {
@@ -226,8 +225,8 @@ const tic_tac_toe_game = (function(win, doc) {
 	return roundWinner;
     }
 
-    function getPlayerTurn() {
-	return playerTurn;
+    function getTurn() {
+	return turn;
     }
 
     function reset() {
@@ -317,7 +316,7 @@ const tic_tac_toe_game = (function(win, doc) {
 		return;
 	    }
 	    
-	    display.textContent = `${playerTurn}'s turn`;
+	    display.textContent = `${turn}'s turn`;
 	}
 
 	function resetBoard() {
@@ -344,6 +343,6 @@ const tic_tac_toe_game = (function(win, doc) {
     })();
     
     return {
-	PLAYERS, fillSpace, printBoard, prepareNextRound, isRoundWinner, getRoundWinner, getBoardState, getPlayerTurn
+	TURNS, fillSpace, printBoard, reset, isRoundWinner, getRoundWinner, getBoardState, getTurn
     }
 })(window, document);
