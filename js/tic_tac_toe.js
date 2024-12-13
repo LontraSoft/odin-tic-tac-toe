@@ -249,7 +249,7 @@ const tic_tac_toe_game = (function(win, doc) {
     function reset() {
 	gameboard.resetBoard();
 	roundWinner = NO_WINNER;
-	playerTurn = TURNS.X;
+	turn = TURNS.X;
     }
     
     function printBoard() {
