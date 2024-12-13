@@ -333,15 +333,16 @@ const tic_tac_toe_game = (function(win, doc) {
 		updateCell(cell);
 	    }
 	}
-	
-	
+
 	function updateDisplay() {
 	    if (isRoundWinner()) {
 		display.textContent = `${roundWinner.name} has won the round!`;
+		disableGridInput();
 		return;
 	    }
 	    if (isBoardFull()) {
 		display.textContent = "The game is a tie!"
+		disableGridInput();
 		return;
 	    }
 	    let currentPlayer = turn === TURNS.X ? PlayerData.getPlayerX() : PlayerData.getPlayerO()
@@ -363,6 +364,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	    reset();
 	    updateDisplay();
 	    updateGrid();
+	    enableGridInput();
 	}
 	
 	function clickCell(event) {
@@ -378,6 +380,16 @@ const tic_tac_toe_game = (function(win, doc) {
 	    updateDisplay();
 	}
 
+	function disableGridInput() {
+	    gameGrid.style.backgroundColor = "rgb(0, 0, 0, 0.3)";
+	    gameGrid.removeEventListener("click", clickCell);
+	}
+
+	function enableGridInput() {
+	    gameGrid.style.backgroundColor = "rgb(0, 0, 0, 0.0)";
+	    gameGrid.addEventListener("click", clickCell);
+	}
+	
 	xNameDisplay.value = PlayerData.getPlayerX().name;
 	oNameDisplay.value = PlayerData.getPlayerO().name;
 	updateNamesSize();
