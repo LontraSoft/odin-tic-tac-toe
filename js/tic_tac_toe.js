@@ -228,6 +228,17 @@ const tic_tac_toe_game = (function(win, doc) {
     function getBoardState(x, y) {
 	return gameboard.getSpaceState(x, y);
     }
+
+    function isBoardFull() {
+	for (let x = 0; x < BOARD_SIDE_LENGTH; x++) {
+	    for (let y = 0; y < BOARD_SIDE_LENGTH; y++) {
+		if (gameboard.getSpaceState(x, y) === gameboard.SPACE_STATES.UNUSED) {
+		    return false;
+		}
+	    }
+	}
+	return true;
+    }
     
     function isRoundWinner() {
 	return roundWinner !== null;
@@ -327,6 +338,10 @@ const tic_tac_toe_game = (function(win, doc) {
 	function updateDisplay() {
 	    if (isRoundWinner()) {
 		display.textContent = `${roundWinner.name} has won the round!`;
+		return;
+	    }
+	    if (isBoardFull()) {
+		display.textContent = "The game is a tie!"
 		return;
 	    }
 	    let currentPlayer = turn === TURNS.X ? PlayerData.getPlayerX() : PlayerData.getPlayerO()
