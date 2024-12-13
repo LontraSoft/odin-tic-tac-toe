@@ -337,6 +337,17 @@ const tic_tac_toe_game = (function(win, doc) {
 	    display.textContent = `${turn}'s turn`;
 	}
 
+	function updateNames() {
+	    console.log(xNameDisplay);
+	    PlayerData.setPlayerX(createPlayer(String(xNameDisplay.value)));
+	    PlayerData.setPlayerO(createPlayer(String(oNameDisplay.value)));
+	}
+
+	function updateNamesSize() {
+	    xNameDisplay.style.width = `${xNameDisplay.value.length}ch`;
+	    oNameDisplay.style.width = `${oNameDisplay.value.length}ch`;
+	}
+
 	function resetBoard() {
 	    reset();
 	    updateDisplay();
@@ -358,8 +369,14 @@ const tic_tac_toe_game = (function(win, doc) {
 
 	xNameDisplay.value = PlayerData.getPlayerX().name;
 	oNameDisplay.value = PlayerData.getPlayerO().name;
+	updateNamesSize();
+	
 	resetButton.addEventListener("click", resetBoard); 
 	gameGrid.addEventListener("click", clickCell);
+	xNameDisplay.addEventListener("change", updateNames);
+	xNameDisplay.addEventListener("input", updateNamesSize);
+	oNameDisplay.addEventListener("change", updateNames);
+	oNameDisplay.addEventListener("input", updateNamesSize);
     })(win, doc);
     
     return {
