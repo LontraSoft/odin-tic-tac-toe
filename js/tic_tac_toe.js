@@ -345,7 +345,7 @@ const tic_tac_toe_game = (function(win, doc) {
 		disableGridInput();
 		return;
 	    }
-	    let currentPlayer = turn === TURNS.X ? PlayerData.getPlayerX() : PlayerData.getPlayerO()
+	    let currentPlayer = turn === TURNS.X ? PlayerData.getPlayerX() : PlayerData.getPlayerO();
 	    display.textContent = `${currentPlayer.name}'s turn`;
 	}
 
