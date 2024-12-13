@@ -371,6 +371,7 @@ const tic_tac_toe_game = (function(win, doc) {
 	xNameDisplay.value = PlayerData.getPlayerX().name;
 	oNameDisplay.value = PlayerData.getPlayerO().name;
 	updateNamesSize();
+	updateDisplay();
 	
 	resetButton.addEventListener("click", resetBoard); 
 	gameGrid.addEventListener("click", clickCell);
