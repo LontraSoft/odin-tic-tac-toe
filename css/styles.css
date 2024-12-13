@@ -1,5 +1,11 @@
 :root {
     --grid-side-length: 100px;
+    --name-font-size: 1.5rem;
+}
+
+h1, h2 {
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -33,18 +39,40 @@ body {
     height: 100%;
 }
 
-.name-container {
+.player-data-container {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
 
-.name-container img {
+.player-data-container img {
     display: block;
     width: var(--grid-side-length);
     height: var(--grid-side-length);
     object-fit: contain;
 }
-    
+
+.name-container {
+    background-color: #ddd;
+    padding: 10px;
+    font-size: var(--name-font-size);
+    border: 2px outset #bbb;
+    border-radius: 15px;
+}
+
+.name-container:focus-within {
+    outline: 2px solid #22f;
+    box-shadow: 0px 0px 4px 6px #33f;
+}
+
+.name-container input {
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: center;
+    outline: none;
+}

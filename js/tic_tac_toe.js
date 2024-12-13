@@ -258,8 +258,8 @@ const tic_tac_toe_game = (function(win, doc) {
 
     let displayController = (function (win, doc) {
 	// DOM constants
-	const xNameDisplay = doc.querySelector(".player-x-name");
-	const oNameDisplay = doc.querySelector(".player-o-name");
+	const xNameDisplay = doc.querySelector("#player-x-name-input");
+	const oNameDisplay = doc.querySelector("#player-o-name-input");
 	const gameGrid = doc.querySelector(".game-board");
 	const cell_0_0 = doc.querySelector("#cell-0-0");
 	const cell_1_0 = doc.querySelector("#cell-1-0");
@@ -356,8 +356,8 @@ const tic_tac_toe_game = (function(win, doc) {
 	    updateDisplay();
 	}
 
-	xNameDisplay.textContent = PlayerData.getPlayerX().name;
-	oNameDisplay.textContent = PlayerData.getPlayerO().name;
+	xNameDisplay.value = PlayerData.getPlayerX().name;
+	oNameDisplay.value = PlayerData.getPlayerO().name;
 	resetButton.addEventListener("click", resetBoard); 
 	gameGrid.addEventListener("click", clickCell);
     })(win, doc);
