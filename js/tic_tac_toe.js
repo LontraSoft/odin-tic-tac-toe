@@ -212,11 +212,6 @@ const tic_tac_toe_game = (function(win, doc) {
 	    return;
 	}
 
-	if (gameWinner !== NO_WINNER) {
-	    win.console.log(`The game has already been won by ${gameWinner}`);
-	    return;
-	}
-
 	if (turn === TURNS.X) {
 	    gameboard.setSpaceState(x, y, gameboard.SPACE_STATES.X);
 	}
