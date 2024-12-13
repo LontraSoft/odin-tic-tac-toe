@@ -334,7 +334,8 @@ const tic_tac_toe_game = (function(win, doc) {
 		display.textContent = `${roundWinner.name} has won the round!`;
 		return;
 	    }
-	    display.textContent = `${turn}'s turn`;
+	    let currentPlayer = turn === TURNS.X ? PlayerData.getPlayerX() : PlayerData.getPlayerO()
+	    display.textContent = `${currentPlayer.name}'s turn`;
 	}
 
 	function updateNames() {
